@@ -1,0 +1,18 @@
+import os, csv
+
+with open("100MostStreamedSongs.csv") as file:  # open file
+  reader = csv.DictReader(file)  # read file as dictionary
+
+  for row in reader:
+    dir = os.listdir()  # list of folders in direcotry
+    artist_name = row["Artist(s)"]  # select artists' name
+
+    if artist_name not in dir:  # if artists name isn't already one of the folders, make it one
+      os.mkdir(f"{artist_name}")  # make folder named Artists' name
+
+    song = row["Song"]  # selecting song
+    path = os.path.join(
+      f"{artist_name}/{song}")  # creating path name using .path and .join()
+
+    f = open(path, "w")  # create file at that path (within the folder)
+    f.close  # close file
