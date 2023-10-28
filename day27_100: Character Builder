@@ -1,0 +1,30 @@
+import random as r, time as t, os
+
+# dice roll function that takes any # of sides
+def diceRoll(sides):
+  roll = r.randint(1, sides)
+  return roll
+
+
+# get characters health stats
+# (6 sided dice * 12 sided dice / 2) + 10
+def health():
+  health = ((diceRoll(6) * diceRoll(10)) / 2) + 10
+  return int(health)
+
+
+# get character strength stats
+def strength():
+  strength = ((diceRoll(6) * diceRoll(12)) / 2) + 12
+  return int(strength)
+
+
+while True:
+  print("\033[31m" +"🏹 Character Builder 🗡\n" + "\033[37m")
+  name = input("Name your badass character: " + "\033[35m")
+  type = input("\033[37m" + "\nWhat race is your character (human , elf. dragonborn, etc.)?: " + "\033[35m")
+  print("\n" + "\033[36m" + name, "the", type, "\033[37m")
+  print("Health:" + "\033[32m", health())
+  print("\033[37m" + "Strength:" + "\033[33m", strength())
+  input("\n[Enter] to make another character")
+  os.system("clear")
