@@ -1,0 +1,9 @@
+loan = 1000
+apr = 1.05
+total = 0
+
+for i in range(10):
+    loan *= apr
+    total += loan
+    print("Year", i + 1, "is", round(loan, 2))
+print("Total owed: $" + str(round(total, 2)))
