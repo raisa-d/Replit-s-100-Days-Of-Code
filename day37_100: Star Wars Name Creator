@@ -1,0 +1,39 @@
+title = "find out your star wars name".title()
+print("\033[1;35m", "\033[4m", f"{title:^35}", "\033[0m", sep="")
+print()
+
+info = input(
+  "Enter your...\n1. first name\n2. last name\n3. mom's maiden name\n4. the city you were born in\n\nPlease enter each item separated by spaces\n> "
+).split()
+
+first = info[0].strip()
+last = info[1].strip()
+maiden = info[2].strip()
+city = info[3].strip()
+
+name = f"{first[:3].title()}{last[:3].lower()} {maiden[:2].title()}{city[-3:].lower()}"
+
+print()
+print("Your Star Wars name is ", "\033[1;36m", f"{name}", sep="")
+'''
+# Another way to write this code if you want to enter each item separately
+firstName = input("What's your first name? ").strip().lower()
+lastName = input("What's your last name? ").strip().lower()
+
+f = firstName[:3]
+l = lastName[:3]
+swFirstName = f"{f}{l}".capitalize()
+
+maiden = input("What is your mother's maiden name? ").lower()
+city = input("What city were you born in? ").lower()
+
+m = maiden[:2]
+c = city[-3:]
+swLastName = f"{m}{c}".capitalize()
+
+print()
+print("Your Star Wars name is ",
+      "\033[1;36m",
+      f"{swFirstName} {swLastName}",
+      sep="")
+'''
