@@ -1,0 +1,66 @@
+import time as t
+import os
+
+toDo = []  # empty list
+
+
+def printList():
+  title1 = "To Do List:"
+  print(f"{title1:^50}")
+  print()
+  counter = 1
+  for item in toDo:
+    print(f"{counter}. {item}")
+    counter += 1
+  print()
+
+
+title = "To Do List Manager"
+print(f"{title:^50}")
+
+while True:
+  menu = input(
+    "\nDo you want to view, add, remove, edit, erase, or exit your to do list?: "
+  )
+
+  if menu.lower() == "view":  # view
+    t.sleep(0.5)
+    os.system("clear")
+    printList()
+
+  elif menu.lower() == "add":  # add
+    item = input("\nWhat should I add to the to do list?: ").title()
+    if item in toDo:
+      print(f"{item} is already on your To Do List")
+    else:
+      toDo.append(item)
+
+  elif menu.lower() == "remove":  # remove
+    item = input("\nWhich item have you completed?: ").title()
+    if item in toDo:  # if item is in list
+      doubleCheck = input(
+        f"Are you sure you want to remove {item} from the list? "
+      )  # double check they want to remove item
+      if doubleCheck.lower() == "yes":  # if they do want to remove it
+        toDo.remove(item)
+      else:  # if they don't want to remove it
+        continue
+    else:  # if item isn't in list
+      print(f"\n{item} was not in the list")
+
+  elif menu.lower() == "edit":  # edit
+    t.sleep(1)
+    os.system("clear")
+    printList()
+    old = input("\nWhich item do you want to edit? ").title()
+    new = input("\nType in new list item: ").title()
+    index = toDo.index(old)
+    toDo[index] = new
+    os.system("clear")
+    printList()
+
+  elif menu.lower() == "erase":
+    toDo.clear()  # erase every item in list
+
+  elif menu.lower() == "exit":  # exit
+    break
