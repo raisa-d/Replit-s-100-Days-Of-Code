@@ -1,0 +1,29 @@
+import random
+
+print("🌱 Character Health Statistics Generator 🌱")
+
+# rolls a die of any size
+def rollDie(numOfSides):
+  roll = random.randint(1, numOfSides)
+  return roll
+
+# use previous function to roll one six-sided die and one eight-sided die
+def rollDice():
+  side6 = rollDie(6)
+  side8 = rollDie(8)
+  healthStats = side6 * side8
+  return healthStats
+
+generateNew = "yes"
+
+while generateNew == "yes":
+  # ask user for character's name
+  name = input("\nWhat is your Character's name? " + "\033[36m")
+  
+  # assign function to a variable so we can print it 
+  healthStats = rollDice()
+
+  # print character name and stat
+  print(name + "\'s " + "\033[37m" + "health statistic is " + "\033[32m" + str(healthStats), "hp")
+
+  generateNew = input("\033[37m" + "\nWould you like to generate health stats for another character? " + "\033[35m")
