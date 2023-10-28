@@ -1,0 +1,20 @@
+title = "Contact Card"
+print(f"{title:^50}")
+
+name = input("Input your name\n> ").strip().title()
+dob = input("\nInput your date of birth (MM/DD/YYYY)\n> ").strip()
+phone = input("\nInput your phone number\n> ").strip()
+email = input("\nInput your email address\n> ").strip().lower()
+address = input("\nInput your address\n> ").strip().Title()
+
+info = {
+  "name": name,
+  "dob": dob,
+  "phone": phone,
+  "email": email,
+  "address": address
+}
+
+print(
+  f"\nHi {info['name']}. Our dictionary says that you were born on {info['dob']}, we can call you on {info['phone']}, email {info['email']}, or write to {info['address']}."
+)
