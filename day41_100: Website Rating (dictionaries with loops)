@@ -1,0 +1,20 @@
+website = {
+  "name": None, 
+  "url": None, 
+  "description": None, 
+  "rating": None,
+}
+
+title = "Website Rating"
+print(f"{title:^60}")
+print()
+
+# using a for loop to iterate through website dictionary and ask user to input a value for each dictionary key
+for name, value in website.items():
+  website[name] = input(f"Enter {name} of website: ")
+
+print()
+
+# using for loop to print information that was input
+for name, value in website.items():
+  print(f"Website {name}: {value}")
