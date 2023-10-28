@@ -1,0 +1,44 @@
+# idea list or generation
+
+import time as t, os, random as r
+
+def add_idea():
+  idea = input("\nInput your idea\n> ").title() # inpout your idea
+  f = open("ideas.txt", "a") # open ideas file
+  f.write(f"{idea}\n") # write idea in file
+  f.close() # close file
+  print("\n>>Your idea has been added!<<")
+  t.sleep(1)
+def load_idea():
+  f = open("ideas.txt", "r") # open file for read-only
+  ideas = f.read().split("\n") # now, each idea/line is a string in a list
+  f.close()
+  ideas.remove("") # remove any blank lines
+  random_idea = r.choice(ideas) # choose one item in list, one idea
+  print(random_idea)
+  input("\nPress enter to continue\n")
+
+title = "💡 Idea Storage 💡"
+
+while True:
+  os.system("clear")
+  print(f"{title:^50}\n") # print title centered
+  
+  add_or_load = input("Would you like to\nadd an idea\nor\nload a random one?\n(add/load)\n> ").strip().lower()
+  
+  if add_or_load in ["add", "a"]: # add idea
+    add_idea()
+    continue
+  
+  elif add_or_load in ["load", "l"]: # load random idea
+    load_idea()
+    continue
+
+  elif add_or_load == "x":
+    print("\nGoodbye!")
+    break
+  
+  else:
+    print('Invalid input.\nPlease type in "add", "load", or "x" to exit')
+    t.sleep(1)
+    continue
