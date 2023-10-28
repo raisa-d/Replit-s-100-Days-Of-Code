@@ -1,0 +1,12 @@
+def factorial(n):
+  if n <= 1:
+    return 1
+  else:
+    return n * factorial(n-1) # call itself * itself - 1
+title = "⟦Factorial Finder⟧"
+print(f"{title:>30}\n") # print title
+
+value = input("Input the number you want a factorial of\n> ").strip() # get input
+
+result = factorial(int(value)) # cast value as an integer and pass it into factorial function
+print(f"\nThe factorial of {value} is {result}")
