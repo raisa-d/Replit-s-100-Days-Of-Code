@@ -1,0 +1,11 @@
+import csv
+
+revenue = 0.0 # tracking total sales in the day
+
+with open("Day54Totals.csv") as file:
+  reader = csv.DictReader(file)
+
+  for row in reader:
+    revenue += float(row['Cost']) * int(row['Quantity']) # multiply cost by quantity and add that to revenue variable
+
+print(f"Today's revenue was ${round(revenue, 2)}")
