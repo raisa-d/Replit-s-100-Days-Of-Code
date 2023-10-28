@@ -1,0 +1,124 @@
+import time as t
+import os
+
+toDoList = []
+
+f = open("to_do.txt", "r")
+toDoList = eval(f.read())
+f.close()
+
+title = "To Do List Manager"
+Title = f"{title:^50}\n"
+
+
+def printList():  # printing list
+  os.system("clear")
+  title2 = "To Do List"
+  print(f"{title2:^50}")
+  print()
+  counter = 1
+  for row in toDoList:
+    print(f"{counter} ", *row, sep=" | ")
+    counter += 1
+  print()
+
+
+def view():  # viewing options
+  viewMenu = input("[1] View all\n[2] View by priority\n> ")
+  if viewMenu == "1":  # view all
+    printList()
+  if viewMenu == "2":  # view by priority
+    filter = input("\nWhat priority (high, medium, low)?\n> ").strip().title()
+    os.system("clear")
+    title2 = f"To Do List: {filter} Priority Items"
+    print(f"{title2:^50}")
+    print()
+    counter = 1
+    for row in toDoList:
+      if filter in row:  # if word "high, medium, or low" is in any row
+        print(f"{counter}. ", end="")
+        counter += 1
+        for item in row:
+          print(item, end=" | ")
+        print()
+    print()
+
+
+def addItem():  # add item
+  item = input("\nWhat do you need to do?\n> ").strip().title()
+  dueDate = input("\nWhen is it due by?\n>  ").strip().title()
+  priority = input("\nPriority level (high, medium, low)?\n> ").strip().title()
+  for row in toDoList:  # checking if item is already on list
+    if item in row:
+      print(f"{item} is already on your To Do List")
+      return
+  else:  # if item isn't already on list
+    listItem = [item, dueDate, priority]
+    toDoList.append(listItem)
+    print(f"\"{item}\" added!")
+
+
+def editItem():  # edit list
+  os.system("clear")
+  printList()
+  oldTask = input("\nName of item to edit\n> ").strip().title()
+  found = False  # initialized as old task not being found
+  for row in toDoList:
+    if oldTask in row:  # if task is in row
+      found = True  # we have found it
+      toDoList.remove(row)
+  if not found:  # if didn't find it
+    print("We could not find that item in the list.")
+    return
+
+  newTask = input("\nNew to do list item\n> ").strip().title()
+  newDueDate = input("\nDue Date\n> ").strip().title()
+  newPriority = input("\nPriority\n> ").strip().title()
+  newRow = [newTask, newDueDate, newPriority]
+  toDoList.append(newRow)
+  print(f"{newTask} added!")
+
+  t.sleep(0.5)
+  os.system("clear")
+  printList()
+
+
+def removeItem():
+  os.system("clear")
+  printList()
+  find = input("Which item have you completed?\n> ").strip().title()
+  for row in toDoList:
+    if find in row:
+      toDoList.remove(row)  # remove row
+      print(f"\"{find}\" removed!")
+      t.sleep(1)
+
+
+while True:
+  os.system("clear")
+  print(Title)
+  menu = input(
+    "[1] Add item to to do list\n[2] View list\n[3] Edit list item\n[4] Remove list item\n[5] Exit\n\n> "
+  )
+  if menu == "1":  # add
+    addItem()
+    t.sleep(0.5)
+  elif menu == "2":  # viewing menu
+    view()
+    enter = input("\n[Enter] to return to menu\n")
+    if enter == "":
+      continue
+  elif menu == "3":  # edit
+    editItem()
+  elif menu == "4":  # remove
+    removeItem()
+  elif menu == "5":  # exit
+    print("\nGoodbye now!")
+    break
+
+  # autosave
+  f = open(
+    "to_do.txt", "w"
+  )  # we set it to "w" because we are deleting the file and replacing it with the whole 2D list every time
+  f.write(str(toDoList))  # cast the list to a single string
+  f.close()
