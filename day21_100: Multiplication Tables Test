@@ -1,0 +1,22 @@
+# Times Tables Game
+print("Do you know your times tables? Play to find out!")
+print()
+
+num = int(input("Choose your number: "))
+score = 0
+
+for i in range(1, 11):
+    correct = i * num
+    print(i, "x", num)
+    answer = int(input("= "))
+    if answer == correct:
+        print("Great job! You got the answer right!\n")
+        score += 1
+    elif answer != correct:
+        print("Oops, you got that one wrong.\nIt should have been",
+              str(correct) + ".\n")
+
+if score < 10:
+    print("You scored", score, "out of 10")
+elif score == 10:
+    print("You are brilliant! You scored", score, "out of 10! 🤪")
