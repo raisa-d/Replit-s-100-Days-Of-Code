@@ -1,0 +1,39 @@
+import random, os
+
+totalAttempts = 0
+
+
+def game():
+  attempts = 1  # starting attempts at 1
+  number = random.randint(
+    1, 100
+  )  # number kept changing after each iteration through the while loop so you can never guess it. needed to move it outside of the while True loop
+  while True:
+    guess = int(input("Pick a number between 1 and 100: "))
+    if guess > number:
+      print("Too high")
+      attempts += 1
+    elif guess < number:
+      print("Too low")
+      attempts += 1
+    else:
+      print("Just right!")
+      print(f"{attempts} attempts this round")
+      return attempts
+
+
+while True:
+  os.system("clear")
+  menu = input("1: Guess the random number game\n2: Total Score\n3: Exit\n\n> ")
+  if menu == "1":
+    totalAttempts += game()
+  elif menu == "2":
+    print(f"\nYou've had {totalAttempts} attempts")
+    input("\n[Enter] to continue")
+  elif menu == "3":  # added goodbye message
+    print("Goodbye!")
+    break
+  else:  # added ability to handle incorrect input
+    print("Invalid input")
+    input("\nEnter to continue")
+    continue
