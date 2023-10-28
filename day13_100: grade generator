@@ -1,0 +1,20 @@
+print("Grade Generator")
+print()
+
+testName = input("What is the name of your test? ")
+maxScore = int(input("What is the maximum possible score? "))
+yourScore = int(input("How many points did you get? "))
+
+percentage = (yourScore / maxScore) * 100
+percentage = round(percentage)
+
+if percentage >= 93 and percentage <= 100:
+  print("\033[36 m Congratulations, your score of", str(percentage), "percent and got you an A!")
+elif percentage >= 83 and percentage <=92:
+  print("Great job! You got a score of", str(percentage),"percent and landed a B!")
+elif percentage >= 73 and percentage <= 82:
+  print ("You could do better, you got a C and a score of", str(percentage), "percent.")
+elif percentage >= 60 and percentage <= 72:
+  print("Go to office hours, you got a D and a score of", str(percentage), "percent on the exam.")
+else:
+  print("You got an F. See if you can retake the exam. Your score was", percentage, "percent.")
