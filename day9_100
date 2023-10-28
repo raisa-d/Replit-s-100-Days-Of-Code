@@ -1,0 +1,17 @@
+print("Find out what generation are you a part of!")
+print()
+yearBorn = int(input("What year were you born in? "))
+if yearBorn >= 1901 and yearBorn <= 1927:
+  print("You are part of the Greatest Generation being born in", yearBorn)
+if yearBorn >= 1928 and yearBorn <= 1946:
+  print("Because you were born in", yearBorn + ", you are part of the Traditionalist generation!")
+if yearBorn >= 1947 and yearBorn <= 1964:
+  print("Being born in", yearBorn, "makes you a Baby Boomer!")
+if yearBorn >= 1965 and yearBorn <= 1981:
+  print("You are part of Generation X since you were born in", yearBorn)
+if yearBorn >= 1982 and yearBorn <=1995:
+  print("You are a Millenial since you were born in", yearBorn)
+if yearBorn >= 1996 and yearBorn <= 2015:
+  print("You are a Gen Zer since you were born in", yearBorn)
+else:
+  print("")
