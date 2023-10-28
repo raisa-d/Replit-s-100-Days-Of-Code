@@ -1,0 +1,26 @@
+def color(word, color):
+  if color == "red":
+    print("\033[0;31m", word, "\033[0m", sep="", end=" ")
+  elif color == "yellow":
+    print("\033[0;33m", word, "\033[0m", sep="", end=" ")
+  elif color == "green":
+    print("\033[0;32m", word, "\033[0m", sep="", end=" ")
+  elif color == "blue":
+    print("\033[0;34m", word, "\033[0m", sep="", end=" ")
+  elif color == "cyan":
+    print("\033[0;36m", word, "\033[0m", sep="", end=" ")
+  elif color == "purple":
+    print("\033[0;35m", word, "\033[0m", sep="", end=" ")
+  else:  # reset
+    print("\033[0m", word, sep="", end="")
+
+
+print("\033[4m", "Super Function", sep="")
+color("\nWith my ", "reset")
+
+color("new program", "purple")
+color("I can just call red", "green")
+color("and", "red")
+color("that word will appear", "yellow")
+color("in the color I set it to.\n\nWith no", "blue")
+color("weird gaps", "green")
