@@ -1,0 +1,10 @@
+print("\033[35m" + "Welcome to your adventure! I will ask you questions and then create an epic story with you as the star!", "\033[36m" + "\n\nLet's begin!\n")
+
+yourName = input("What is your name?: ")
+enemyName = input("What is your enemy's name?: ")
+superpower = input("What is your superpower?: ")
+city = input("What city do you live in?: ")
+food = input("What is your favorite food?: ")
+
+print()
+print("Hello", yourName + "! Your ability to", superpower, "will make sure you never have to look at", enemyName, "again. Go eat", food, "as you walk down the streets of", city, "and use", superpower, "for good and not evil!")
