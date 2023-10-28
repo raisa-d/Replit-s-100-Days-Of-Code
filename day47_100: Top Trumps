@@ -1,0 +1,84 @@
+import random as r, time as t, os
+
+def Title():
+  os.system("clear")
+  title = "🎃 Top Trumps 🎃"
+  subtitle = "Welcome to Top Trumps 'Most badass character from the 100'".title()
+  print(f"{title:^60}")
+  print(f"{subtitle:^60}")
+
+characters = {
+  "Octavia": {
+    "Intelligence": 75,
+    "Survival Skills": 90,
+    "Hotness": 100
+  },
+  "Jasper": {
+    "Intelligence": 65,
+    "Survival Skills": 50,
+    "Hotness": 85
+  },
+  "Raven": {
+    "Intelligence": 95,
+    "Survival Skills": 95,
+    "Hotness": 95
+  },
+  "Clarke": {
+    "Intelligence": 85,
+    "Survival Skills": 92,
+    "Hotness": 80
+  },
+  "Bellamy": {
+    "Intelligence": 75,
+    "Survival Skills": 85,
+    "Hotness": 95
+  },
+  "Monty": {
+    "Intelligence": 90,
+    "Survival Skills": 80,
+    "Hotness": 90
+  },
+  "Murphy": {
+    "Intelligence": 70,
+    "Survival Skills": 70,
+    "Hotness": 70
+  }
+}
+
+again = "y"
+while True:
+  Title()
+  print("Choose your character by entering their name:")
+  counter = 1
+  for key in characters:
+    print(f"{counter}. {key}")
+    counter += 1
+  char = input("\n> ").strip().title()  # choose character
+
+  # computer's choice of character
+  compChoice = r.choice(
+    ['Octavia', 'Jasper', 'Raven', 'Clarke', 'Bellamy', 'Monty', 'Murphy'])
+  if compChoice == char: # if answer is same as user's
+    compChoice = r.choice(list(characters.keys())) # another way to access key names
+  print(f"\nComputer has chosen {compChoice}")
+
+  # choose statistic to battle
+  stats = input(
+    "\nChoose your stat by entering its name:\n\nIntelligence\nSurvival Skills\nHotness\n> ").strip().title()
+
+  Title()
+  print(f"\n{char}'s {stats.lower()} score is {characters[char][stats]}")
+  print(f"{compChoice}'s {stats.lower()} score is {characters[compChoice][stats]}")
+
+  if characters[char][stats] > characters[compChoice][stats]:
+    print(f"\n{char} wins!")
+  elif characters[compChoice][stats] > characters[char][stats]:
+    print(f"\n{compChoice} wins!")
+  else:
+    print("{char} and {compChoice} tied!")
+    
+  # play again?
+  again = input("\nDo you want to play again (y/n)?\n> ").strip().lower()
+  if again != "y":
+    print("Goodbye!")
+    break
