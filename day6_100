@@ -1,0 +1,12 @@
+print("Secure Login")
+username = input("Username: ")
+password = input("Password: ")
+
+if username == "irene" and password == "1104":
+  print("Welcome, Irene! You are awesome. 🤩")
+elif username == "raisa" and password == "0701":
+  print("Hi, Rai! You're cool.")
+elif username == "becca" and password == "0304":
+  print("What's up, Becca? You're dope.")
+else: 
+  print("You don't have access. Go away!")
