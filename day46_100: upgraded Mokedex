@@ -1,0 +1,68 @@
+import os
+
+red = "\033[31m"
+green = "\033[32m"
+blue = "\033[34m"
+purple = "\033[35m"
+cyan = "\033[36m"
+white = "\033[37m"
+bold = "\033[1m"
+underline = "\033[4m"
+end = "\033[0m"
+
+title = "The Non-Copyright Totally Generic Beast Battle Game"
+
+mokedex = {}
+
+
+def prettyPrint():
+  print()
+  for key, value in mokedex.items():
+    print(f"~~ {key} ~~", end="\n")
+    for subKey, subValue in value.items():
+      print(subKey, subValue, sep=": ", end=" |\n")
+  print()
+
+
+again = "y"
+while True:
+  os.system("clear")
+  print(f"{bold}{underline}{blue}{title:^60}{end}")
+  print()
+  print("Add your beast!\n")
+
+  # get user input
+  name = input("Beast's name > ").strip().title()
+  type = input("\nType (fire, air, earth, water, spirit)\n> ").strip().title()
+  startHP = input("\nStarting HP > ").strip().title()
+  startMP = input("\nStarting MP > ").strip().title()
+  print("----------------")
+
+  # add dictionary of this beast's info to main dictionary
+  mokedex[name] = {
+    "Type": type,
+    "Starting HP": startHP,
+    "Starting MP": startMP
+  }
+
+  # print information in color corresponding with type
+  if mokedex[name]["Type"] == "Fire":
+    print(f"{bold}{red}", end="")
+    prettyPrint()
+  elif mokedex[name]["Type"] == "Water":
+    print(f"{bold}{cyan}", end="")
+    prettyPrint()
+  elif mokedex[name]["Type"] == "Air":
+    print(f"{bold}{white}", end="")
+    prettyPrint()
+  elif mokedex[name]["Type"] == "Earth":
+    print(f"{bold}{green}", end="")
+    prettyPrint()
+  elif mokedex[name]["Type"] == "Spirit":
+    print(f"{bold}{purple}", end="")
+    prettyPrint()
+
+  # option to make another character
+  again = input(f"{end}Do you want to add another character (y/n)?\n> ")
+  if again.strip().lower() != "y":
+    break
