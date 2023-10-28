@@ -1,0 +1,20 @@
+def colorChange(color):
+  if letter.lower() == "r": # red
+    print("\033[0;31m", end="") 
+  if letter.lower() == "g": # green
+    print("\033[32m", end = "")
+  if letter.lower() == "b": # blue
+    print("\033[34m", end = "")
+  if letter.lower() == "y": # yellow
+    print("\033[33m", end = "")
+  if letter.lower() == "p": # purple
+    print("\033[35m", end = "")
+  if letter.lower() == "c": # cyan
+    print("\033[36m", end = "")
+
+sentence = input("Type out the sentence you want to be rainbow-ized\n> ")
+
+for letter in sentence:
+  colorChange(letter.lower())
+  print(letter, end="")
+print()
