@@ -1,0 +1,65 @@
+import random as r
+import os
+
+bingoCard = []  # empty bingo card
+
+# generating numbers for bingo card
+def nums():
+  num = r.randint(1, 90)
+  return num
+
+# pretty printing
+def prettyPrint():
+  for row in bingoCard:
+    for item in row:
+      print(item, sep = " ", end=" ")
+    print()
+
+# title
+title = "Oma's Bingo Card Generator"
+print(f"{title:^50}")
+print()
+
+# function to create and print bingo card
+def createCard():
+  global bingoCard # global keyword to create global variable within function (one that can be used both inside and out of a function)
+  # list of numbers on card
+  numbers = []
+  for i in range(8):  # append 7 numbers to number list
+    num = nums()  # storing a number in variable
+    if num not in numbers:  # if number not already in list of numbers (preventing doubles)
+      numbers.append(num)  # add it to list
+  numbers.sort()  # sort numbers
+  
+  bingoCard = [
+    [numbers[0], " | ", numbers[1], " | ", numbers[2]],  # row one
+    ["----------------"],  # separator
+    [numbers[3], " | ", "🐚", " | ", numbers[4]],  # row two
+    ["----------------"],  # separator
+    [numbers[5], " | ", numbers[6], " | ", numbers[7]],  # row three
+  ]
+  prettyPrint()
+
+createCard() # calling bingo card function
+
+# loop for user to play bingo
+while True:
+  nextNum = int(input("Next Number: "))
+  # does the number picked match the one on the card?
+  for row in range((len(bingoCard))): # 3 because that is the length of the bingo card
+    for item in range((len(bingoCard[row]))): # 3 because that's (len(bingoCard[row]))
+      if bingoCard[row][item] == nextNum: # if item in position is same as the number
+        bingoCard[row][item] = "X" # change value to X
+  os.system("clear")
+  print(f"{title:^50}")
+  print()
+  prettyPrint()
+
+  exes = 0
+  for row in bingoCard: # counting how many Xs there are
+    for item in row:
+      if item == "X":
+        exes += 1
+  if exes == 8:
+    print("\nAnd BINGO was his name-o!\nYou won, you absolute beast!")
+    break
