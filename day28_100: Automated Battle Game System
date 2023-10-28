@@ -1,0 +1,108 @@
+import random as r, time as t, os
+
+# dice roll function that takes any # of sides
+def diceRoll(sides):
+  roll = r.randint(1, sides)
+  return roll
+
+# get characters health stats
+# (6 sided dice * 12 sided dice / 2) + 10
+def health():
+  health = ((diceRoll(6) * diceRoll(12)) / 2) + 10
+  return int(health)
+
+# get character strength stats
+def strength():
+  strength = ((diceRoll(6) * diceRoll(12)) / 2) + 12
+  return int(strength)
+
+print("\033[31m" + "🏹 Time to Battle! 🗡\n" + "\033[37m")
+  
+# create Character 1
+name1 = input("Name your badass character: "+ "\033[35m")
+type1 = input("\033[37m" + "\nWhat race is your character (human , elf. dragonborn, etc.)?: "+ "\033[35m")
+health1 = health()
+strength1 = strength()
+
+# printing character 1 info
+print("\n" + name1, "the", type1)
+print("\033[32m" + "Health:", health1)
+print("Strength:", strength1)
+
+print("\033[37m" + "\nWho is", name1, "battling?\n")
+
+# create Character 2
+name2 = input("Name your badass character: " + "\033[36m")
+type2 = input("\033[37m" + "\nWhat race is your character (human , elf. dragonborn, etc.)?: " + "\033[36m")
+health2 = health()
+strength2 = strength()
+
+# printing character 2 info
+print("\n" + name2, "the", type2)
+print("\033[32m" + "Health:", health2)
+print("Strength:", strength2)
+
+# variable to track # of rounds and winner
+round = 1
+winner = None
+
+while True:
+  t.sleep(3)
+  os.system("clear")
+  
+  # begin the battle
+  print("\033[31m" + "⚔️ The Time for Battle is Here! ⚔️\n" + "\033[37m")
+
+  # first round
+  roll1 = diceRoll(6)
+  roll2 = diceRoll(6)
+
+  # damage calculation
+  damage = abs(strength1 - strength2) + 1
+  
+  if roll1 > roll2:  # if character 1 wins
+    health2 -= damage
+    if round == 1: # print this for first round
+      print("\033[33m" + "ROUND", str(round) + "\n" + "\033[37m")
+      print(name1, "the", type1, "wins the first blow, dealing", damage, "damage to", name2, "the", type2 + "\n")
+    else: # print this for other rounds
+      print("\033[33m" + "ROUND", str(round) + "\n" + "\033[37m")
+      print(name1, "the", type1, "wins round", str(round) + ", dealing", damage, "damage to", name2, "the", type2 + "\n")
+  
+  elif roll2 > roll1: # if character 2 wins
+    health1 -= damage
+    if round == 1: # round 1
+      print("\033[33m" + "ROUND", str(round) + "\n" + "\033[37m")
+      print(name2, "the", type2, "wins the first blow, dealing", damage, "damage to", name1, "the", type1 + "\n")
+    else: # other rounds
+      print("\033[33m" + "ROUND", str(round) + "\n" + "\033[37m")
+      print(name2, "the", type2, "wins round", str(round) + ", dealing", damage, "damage to", name1, "the", type1 + "\n")
+  
+  else: # if there's a tie
+    print("\033[33m" + "ROUND", str(round) + "\n" + "\033[37m")
+    print("The warriors' swords clash and round", round, "is a draw.")
+    
+  # printing characters' health standing
+  print("\033[35m" + "\n" + name1, "the", type1 + "\033[32m" + "\nHealth:", health1)
+  print("\033[36m" + "\n" + name2, "the", type2 + "\033[32m" + "\nHealth:", str(health2) + "\033[37m")
+
+  # checking if characters are alive or not
+  if health1 <= 0: # if character 1 died
+    print("\nYu gonplei ste odon,", name1, "the", type1)
+    winner = name2
+    break
+    
+  elif health2 <= 0: # if character 2 died
+    print("\nYu gonplei ste odon,", name2, "the", type2)
+    winner = name1
+    break
+  
+  else: # if both are alive, can move to next round
+    print("\nAnd they're both standing for the next round!")
+    round +=1 # add to round
+    t.sleep(3)
+
+t.sleep(5)
+os.system("clear")
+print("\033[31m" + "⚔️ The Time for Battle is Here! ⚔️\n" + "\033[37m")
+print(winner, "has won in", round, "rounds!")
