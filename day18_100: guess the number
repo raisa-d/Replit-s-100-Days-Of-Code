@@ -1,0 +1,26 @@
+# Guess the Number Game
+print("Welcome to Guess the Number Game. \n\nGuess a number between 1 and 1,000,000 and I'll tell you if it's too high, too low, or correct.\n")
+
+num = 70100
+attempts = 0
+
+while True:
+  print("Guess the number I am thinking of")
+  guess = int(input("> "))
+  if guess < 0:
+    print("You chose a negative number so I'm kicking you out. Because I can.")
+    exit()
+  if guess > num:
+    print("Your guess is too high, dream smaller.")
+    attempts += 1
+    continue
+  elif guess < num:
+    print("Your guess is too low, dream bigger!")
+    attempts += 1
+    continue
+  elif guess == num:
+    attempts += 1
+    print("Yay!! You guessed the correct number in", attempts, "attempts 🧜🏼🤗🍄")
+    break
+  else:
+    print("I don't recognize that number.")
