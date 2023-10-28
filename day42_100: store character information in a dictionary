@@ -1,0 +1,37 @@
+red = "\033[31m"
+green = "\033[32m"
+blue = "\033[34m"
+purple = "\033[35m"
+cyan = "\033[36m"
+white = "\033[37m"
+bold = "\033[1m"
+end = "\033[0m"
+
+title = "The Non-Copyright Super Generic Beast Battle Game"
+print(f"{bold}{blue}{title:^60}{end}")
+
+mokebeast = {
+  "name": None,
+  "type": None,
+  "special move": None,
+  "starting HP": None,
+  "starting MP": None
+}
+
+for name, value in mokebeast.items():
+  mokebeast[name] = input(f"Input your beast's {name}\n> ").strip().title()
+  print()
+
+if mokebeast['type'] == "Fire":
+  print(f"{bold}{red}")
+elif mokebeast['type'] == "Water":
+  print(f"{bold}{cyan}")
+elif mokebeast['type'] == "Air":
+  print(f"{bold}{white}")
+elif mokebeast['type'] == "Earth":
+  print(f"{bold}{green}")
+elif mokebeast['type'] == "Spirit":
+  print(f"{bold}{purple}")
+
+for name, value in mokebeast.items():
+  print(f"{name}: {value}")
