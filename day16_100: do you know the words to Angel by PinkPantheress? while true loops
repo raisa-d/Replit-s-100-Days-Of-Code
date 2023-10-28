@@ -1,0 +1,15 @@
+print("Do you know the words to Angel by PinkPantheress?")
+print("Figure out the missing word as quickly as you can!")
+
+counter = 1
+while True:
+    print("\nEveryone told me ______ was hard but it's a piece of cake")
+    lyric = input("> ")
+    if lyric.lower() == "life":
+        print("\nWooo! You got it right!")
+        break
+    else:
+        print("\nNope, try again")
+        counter += 1
+print()
+print("Great job, you got the lyric in", counter, "attempts!")
