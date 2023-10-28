@@ -1,0 +1,25 @@
+leapYear = input("Is it a leap year (y/n)? ")
+
+seconds_in_minute = 60
+minutes_in_hour = 60
+hours_in_day = 24
+days_in_month = 31
+days_in_year = 365
+days_in_leapYear = 366
+months_in_year = 12
+
+hours_in_year = hours_in_day * days_in_year # 24 hours in a day * 365 days in a year
+minutes_in_year = minutes_in_hour * hours_in_year
+
+seconds_in_year = seconds_in_minute * minutes_in_year
+
+# leap year
+
+hours_in_leapYear = hours_in_day * days_in_leapYear
+minutes_in_leapYear = minutes_in_hour * hours_in_leapYear
+seconds_in_leapYear = seconds_in_minute * minutes_in_leapYear
+
+if leapYear.lower() == "y":
+  print("There are", seconds_in_leapYear, "seconds in this leap year!")
+else:
+  print("There are", seconds_in_year, "seconds in the year!")
