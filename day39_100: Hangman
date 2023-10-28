@@ -1,0 +1,124 @@
+import random as r
+import time as t
+import os
+
+hangmanPics = [
+  '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+========='''
+]
+
+# title
+title = "Hangman"
+
+listOfWords = [
+  "british", "suave", "integrity", "accent", "evil", "genius", "mermaid",
+  "fairy", "jubilation", "pottery", "marmalade", "pillow", "pear"
+]
+letterPicked = []
+wordChosen = r.choice(listOfWords)
+lives = 6
+
+while True:
+  print(f"{title:^50}")
+  letter = input("\nGuess a letter: ").lower()  # pick a letter
+
+  if letter in letterPicked:  # if you already picked it
+    print(f"You've already guessed letter {letter.upper()}")
+    input("Enter to continue\n")
+    os.system("clear")
+    continue  # go back to top of loop to try again
+  letterPicked.append(
+    letter
+  )  # if it hasn't been picked before, we are adding it to the list of letters
+
+  if letter in wordChosen:
+    print("You found a letter!")
+  else:  # if letter is not in the word
+    lives -= 1
+    print(f"\n{letter.upper()} is not in the word.")
+  if lives == 6:
+    print(hangmanPics[0])
+  if lives == 5:
+    print(hangmanPics[1])
+  if lives == 4:
+    print(hangmanPics[2])
+  if lives == 3:
+    print(hangmanPics[3])
+  if lives == 2:
+    print(hangmanPics[4])
+  if lives == 1:
+    print(hangmanPics[5])
+  if lives <= 0:
+    print(hangmanPics[6])
+
+  allLetters = True  # checking if all the letters in the word have been guessed. first , we assume all letters are found. then, when we get to a point where we don't have a letter. we set allLetters to false
+
+  print()
+  for i in wordChosen:  # for each letter in the chosen word, we are seeing if it is letterPicked (if any letter in the word has been picked by the user)
+    if i in letterPicked:  # if letter is in list of picked letters, print the letter that was picked
+      print(i, end="")
+    else:  # if letter is wrong, print blank spaces
+      print("_", end=" ")
+      allLetters = False  # set allLetters to false since we have not found them all
+  print()
+
+  if allLetters:  # if all letters is true, the word has been found
+    print(f"You won with {lives} lives left!")
+    break
+
+  if lives <= 0:  # if lives are 0 or below, you've lost
+    print(f"\nYou ran out of lives. The answer was {wordChosen}")
+    break
+
+  else:
+    print(f"\nOnly {lives} lives left. Choose wisely...")
+    input("Enter to continue\n")
+    os.system("clear")
