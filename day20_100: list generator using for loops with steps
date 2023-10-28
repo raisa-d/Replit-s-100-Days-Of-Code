@@ -1,0 +1,12 @@
+print(
+    "Welcome to my List Generator! \n You will have to input three things: \n 1. A starting integer \n 2. An integer you want the list to end before\n  (list will not include this number) \n 3. How many you want me to add each time"
+)
+
+start = int(input("\n" + "What number should we start at?: "))
+endBefore = int(input("What number should we end before?: "))
+step = int(input("How many should I add each time?: "))
+
+print()
+
+for i in range(start, endBefore, step):
+    print(i)
