@@ -1,0 +1,7 @@
+import random as r 
+
+greetings = ["Hello", "Hola", "Monin", "Sop", "Previet", "Bonjour", "Halo", "Aloha"]
+
+ind = r.randint(0,4)
+
+print(f"{greetings[ind]}")
