@@ -1,0 +1,31 @@
+import os
+
+nameList = []
+
+title = "List of Names"
+print(f"{title:^40}\n")
+
+def printList():
+  os.system("clear")
+  counter = 1
+  title = "Rolodex"
+  print(f"{title:^50}")
+  print()
+  for name in nameList:
+    print(f"{counter}. {name}")
+    counter += 1
+  print()
+
+while True:
+  add = input("Would you like to add to the list or view it? ")
+  if add.strip().lower() == "add":
+    firstName = input("\nFirst name: ").strip().capitalize()
+    lastName = input("Last name: ").strip().capitalize()
+    print()
+    name = f"{firstName} {lastName}"
+    if name not in nameList:
+      nameList.append(name)
+    else:
+      print("\033[1;31m", "\nError: ", "\033[0;37m", "Duplicate name\n", sep = "")
+  elif add.strip().lower() == "view":
+    printList()
