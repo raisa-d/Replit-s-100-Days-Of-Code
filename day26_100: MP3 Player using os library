@@ -1,0 +1,57 @@
+from replit import audio
+import os, time
+
+
+def play():
+  source = audio.play_file('audio.wav')
+  source.paused = False  # unpause the playback
+  os.system("clear")
+  print("\033[35m" + "🎧 MP3 Player\n")
+  print("\033[31m" + "Playing your song!\n")
+  while True:
+    time.sleep(1)
+    print("\033[32m" +"Press 1 to pause")
+    time.sleep(1)
+    print("Press 2 to return to main menu\n")
+    mainMenu = input("\n")
+    
+    if mainMenu == "1": # pause song
+      os.system("clear")
+      print("\033[35m" + "🎧 MP3 Player\n")
+      print("\033[31m" + "Pausing your song...\n" + "\033[32m")
+      source.paused = True
+      
+      playAgain = input("Press 1 to play \nPress 2 to return to main menu\n\n")
+      if playAgain == "1": # play song again
+        os.system("clear")
+        print("\033[35m" + "🎧 MP3 Player\n")
+        print("\033[31m" + "Playing your song!\n")
+        source.paused = False
+        continue
+     
+      elif playAgain == "2": # pause song and return to main menu
+        source.paused = True
+        break
+    
+    else: # pause song and return to main menu
+      source.paused = True
+      break
+
+while True:
+  os.system("clear")
+  print("\033[35m" + "🎧 MP3 Player\n")
+  time.sleep(1)
+  print("\033[36m" + "Press 1 to Play")
+  time.sleep(1)
+  print("Press 2 to Exit")
+  time.sleep(1)
+  print("Press anything else to see the menu again" + "\033[32m")
+  playSong = input("\n")
+  if playSong == "1":
+    play()
+  elif playSong == "2":
+    os.system("clear")  # clear screen
+    break
+  else:
+      os.system("clear")
+      continue
