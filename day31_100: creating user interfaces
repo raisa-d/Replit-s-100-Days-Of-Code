@@ -1,0 +1,65 @@
+def colorChange(color):
+  if color == "red":
+    return ("\033[31m")
+  elif color == "white":
+    return ("\033[0m")
+  elif color == "blue":
+    return ("\033[34m")
+  elif color == "yellow":
+    return ("\033[33m")
+  elif color == "green":
+    return ("\033[32m")
+  elif color == "purple":
+    return ("\033[35m")
+
+    # Spotify User Interface (UI)
+
+
+# writing title
+title = f"{colorChange('red')}={colorChange('white')}={colorChange('blue')}= {colorChange('green')}Spotify {colorChange('blue')}={colorChange('white')}={colorChange('red')}="
+
+# priting song and artist
+print(f"{title:^80}")
+print(f"⏯\t{colorChange('white')}Modern Love")
+print(f"\t{colorChange('purple')}David Bowie")
+
+# previous song
+print("\n")
+prev = "PREV"
+print(f"{colorChange('white')}{prev:<35}")
+
+# next song
+next = "NEXT"
+print(f"{colorChange('green')}{next:^25}")
+
+# pause
+pause = "PAUSE"
+print(f"{colorChange('yellow')}{pause:>25}")
+
+print("\n\n")
+
+# Facebook UI
+welcome = "WELCOME TO"
+print(f"{colorChange('white')}{welcome:^50}")
+
+armbook = "--    ARMBOOK    --"
+print(f"{colorChange('blue')}{armbook:>35}\n\n")
+
+phrase1 = "Definitely not a rip off"
+print(f"{colorChange('yellow')}{phrase1:>35}")
+
+phrase2 = "a certain other social"
+print(f"{phrase2:>35}")
+
+phrase3 = "networking site."
+print(f"{phrase3:>35}")
+print()
+text = "Honest."
+print(f"{colorChange('red')}{text:^50}")
+
+print()
+
+username = "Username: "
+password = "Password: "
+print(f"{colorChange('white')}{username:^50}")
+print(f"{colorChange('white')}{password:^50}")
