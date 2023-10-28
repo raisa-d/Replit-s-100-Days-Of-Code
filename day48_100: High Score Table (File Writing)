@@ -1,0 +1,21 @@
+f = open("savedFile.txt",
+         "a")  # a will append and add to the end of an existing file
+
+title = 'High Score Table\n'
+print(f"{title:^50}")
+
+again = "y"
+while True:
+  initials = input("What are your initials?\n> ").strip().upper()
+
+  score = input("Score out of 100,000\n> ").strip()
+  print('>>added to high score table<<')
+
+  f.write(f"{initials}: {score}\n")  # write it in file
+
+  again = input("\nEnter a new score (y/n)?\n> ").strip().lower()
+
+  if again != "y":
+    break
+
+f.close()
