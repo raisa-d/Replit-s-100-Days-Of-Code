@@ -1,0 +1,35 @@
+import os, time
+emailList = []
+
+def prettyPrint():
+  os.system("clear") # clear the screen
+  title = "Email List"
+  print(f"{title:^35}") # title of program
+  print()
+
+  counter = 1
+  for email in emailList: # len gets how many items in list
+    print(f"{counter}. {email}")
+    counter += 1
+  time.sleep(1)
+
+while True:
+  print("SPAMMER Inc.")
+  menu = input("1. Add email\n2. Remove email\n3. Show emails\n4. Get SPAMMING\n> ")
+  if menu == "1":
+    email = input("Email > ")
+    emailList.append(email)
+  elif menu == "2":
+    email = input("Email > ")
+    if email in emailList:
+      emailList.remove(email)
+  elif menu == "3":
+    prettyPrint()
+    time.sleep(3)
+  elif menu == "4":
+    for email in emailList[:10]:
+      print(f"Dear {email},\n\nIt has come to our attention that you're missing out on the 100 days of code. We insist you do it right away. If not, we'll send your email address toe very spammer we've ever encountered and sign you up to the Scientology newsletter, because that's neat. We might just do that anyway.\n\nLove and hugs,\nIan Spammington III")
+      time.sleep(3)
+      os.system("clear")
+  time.sleep(1)
+  os.system("clear")
