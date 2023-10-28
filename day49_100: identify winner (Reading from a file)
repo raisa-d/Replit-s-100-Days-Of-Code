@@ -1,0 +1,41 @@
+f = open("example.txt", "a")
+title = '🍄 Current Leader 🍄'
+print(f"{title:^50}")
+
+# to add scores 
+while True:
+  again = input("Enter a new score (y/n)?\n> ").strip().lower()
+  
+  if again[0] == "y":
+    initials = input("Input Initials\n> ").strip().upper()
+  
+  
+    score = input("Input score out of 100,000\n> ").strip()
+    print('\n>>added to high score table<<')
+  
+    f.write(f"{initials}: {score}\n")  # write it in file
+
+  else:
+    break
+f.close()
+
+
+# read in scores and decie who won
+f = open("example.txt","r")
+scores = f.read().split("\n") # split list line break
+
+highscore = 0
+winner_name = None
+
+for rows in scores: # print each row as a list of two elements: initials nad score
+  data = rows.split()
+  #print(data)
+  
+  if data != []: # if data is not blank
+    if int(data[1]) > highscore: # if score is greater than highscore
+      highscore = int(data[1])
+      winner_name = data[0]
+
+f.close()
+print("\nAnalyzing winner...")
+print(f"\nThe winner is {winner_name} {highscore}")
