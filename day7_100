@@ -1,0 +1,19 @@
+print("Are you a the 100 superfan or af ake fan?")
+print()
+print("Answer these questions to find out")
+
+favCharacter = input("Who is your favorite character? ")
+if favCharacter.lower() == "jasper":
+  print("You have good taste.")
+else:
+  print("Wrong")
+  years = input("How many years since the nuclear apocalypse has it been when the 100 are sent down to Earth? ")
+  if years == "97":
+    print("You are correct")
+  else:
+    print("Nope.")
+  trigedasleng = input("Yu mema trigedasleng in? ") # Do you speak trigedasleng?
+  if trigedasleng.lower() == "sha":
+    print("Yu ste badas")
+  else: 
+    print("You don't even speak Trigedasleng, you're fake.")
