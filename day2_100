@@ -1,0 +1,10 @@
+print("Getting to know you")
+
+name = input("What is your name?: ")
+food = input("What is your favorite food?: ").lower()
+city = input("What city do you live in?: ")
+pet = input("What is your pet's name?: ")
+print("Hello " + name + "!")
+print()
+print("Your favorite food is", food)
+print("You live in", city, "and I know", pet, "is adorable.")
