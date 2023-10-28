@@ -1,0 +1,63 @@
+import os
+
+inv = []
+
+try:
+  f = open("inventory.txt", "r")
+  inventory = eval(f.read())
+  f.close()
+except:
+  print("There is nothing in your inventory")
+
+
+def Title():
+  os.system("clear")
+  title = "Inventory"
+  print(f"{title:^50}")
+
+
+def add():
+  Title()
+  item = input("\nWhat item would you like to add?\n> ").strip().capitalize()
+  inv.append(item)  # add item to inventory list
+  print(f"\n>>{item} added to inventory<<")
+  input("\n[Enter] to continue")
+
+
+def view():
+  Title()
+
+  seen = []
+  for i in inv:
+    if i not in seen:
+      print(f"{i} x{inv.count(i)}")
+      seen.append(i)
+
+
+def remove():
+  view()
+  item = input(
+    "\nWhat item would you like to remove?\n> ").strip().capitalize()
+  if item in inv:
+    inv.remove(item)
+    print("\n>>removed<<\n")
+  else:
+    print("You don't have that item")
+  input("\n[Enter] to continue")
+
+
+# inventory loop
+while True:
+  Title()
+  menu = input("1. Add\n2. View\n3. Remove\n> ").strip().lower()
+  if menu == "1":
+    add()
+  elif menu == "2":
+    view()
+    input("\n[Enter] to continue")
+  elif menu == "3":
+    remove()
+
+  f = open("inventory.txt", "w")
+  f.write(str(inv))
+  f.close()
