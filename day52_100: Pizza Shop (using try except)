@@ -1,0 +1,96 @@
+import os, time as t
+
+orders = []
+
+try:
+  f = open("orders.txt", "r")
+  orders = eval(f.read())
+  f.close()
+
+except:
+  print("Error: No existing pizza list, using a blank list")
+
+header = "🍕Raisa's ZaZoomies"
+subheader = "Order Your Pizza Online"
+
+def price(qty, sz):
+  if sz[0] == "s":
+    sz = 8  # smalls set to $8
+  elif sz[0] == "m":
+    sz = 12  # mediums set to $12
+  elif sz[0] == "l":
+    sz = 15  # larges set to $15
+
+  return int(qty) * int(sz)
+
+def add():
+  again = True
+  while again:
+    while True:
+      quantity = input("\nHow many pizzas would you like?\n> ").strip()
+      try:
+        int(quantity)
+        break
+      except:
+        print("Please enter a numerical value.")
+
+    size = input("\nWhat size (Small, Medium, Large)?\n> ").strip().lower()
+
+    # formatting it so that when orders are saved, the full size name is saved
+    if size[0] == "s":
+      size = "small"
+    elif size[0] == "m":
+      size = "medium"
+    elif size[0] == "l":
+      size = "large"
+
+    name = input("\nName for the order\n> ").strip().title()
+
+    cost = price(quantity, size)
+    print(f"\nThanks {name}, your pizza(s) will cost ${cost}")
+
+    # store data and add it to 2D orders list
+    listItem = [name, quantity, size.title(), f"${cost}"]
+    orders.append(listItem)
+
+    again = input(
+      "\nWould you like to place another order (yes/no)?\n> ").strip().lower()
+    if again[0] == "y":
+      again = True
+    else:
+      again = False
+
+def view():
+  h1 = "Name"
+  h2 = "Quantity"
+  h3 = "Size"
+  h4 = "Total"
+  print(f"\n{h1}{h2:^16}{h3}{h4:^15}\n")
+  for i in orders:
+    print(*i, sep = "\t|\t", end = "\n")
+  input("")
+
+
+while True:
+  os.system("clear")
+  print(f"{header:^50}\n{subheader:^50}")
+  menu = input("\nWould you like to add, view, or exit?\n> ").strip().lower()
+
+  try:
+    if menu[0] == "a":  # add order
+      add()
+  
+    elif menu[0] == "v":  # view orders
+      view()
+  
+    else:  # exit
+      break
+
+  except:
+    print("Please enter a valid option.")
+    t.sleep(0.5)
+
+  # autosave
+  f = open("orders.txt", "w")
+  f.write(str(orders))  # cast the list to a single string
+  f.close()
