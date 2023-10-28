@@ -1,0 +1,24 @@
+print("The 100 Character Generator")
+print()
+
+Octavia = input("Are you trained in grounder combat?: ")
+if Octavia == "yes":
+  print("Yu laik Oktevia kom Wonkru")
+else:
+  print("Aw, you aren't Octavia")
+
+print()
+
+Clarke = input("Do you choose who lives and who dies?: ")
+if Clarke == "yes":
+  print("You are Wanheda, Commander of Death")
+else:
+  print("You are not Clarke")
+
+print()
+
+Raven = input("Are you a master coder who saves everyone with your mad skills?: ")
+if Raven == "yes":
+  print("You are Raven and you're a badass")
+else:
+  print("You aren't Raven")
