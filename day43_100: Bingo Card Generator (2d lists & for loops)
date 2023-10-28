@@ -1,0 +1,39 @@
+import random as r
+
+bingoCard = []  # empty bingo card
+
+# title
+title = "Oma's Bingo Card Generator"
+print(f"{title:^50}")
+print()
+
+
+# generating numbers for bingo card
+def nums():
+  num = r.randint(1, 90)
+  return num
+
+
+# pretty printing
+def prettyPrint():
+  for row in bingoCard:
+    print(*row, sep="")
+
+
+# list of numbers on card
+numbers = []
+for i in range(8):  # append 7 numbers to number list
+  num = nums()  # storing a number in variable
+  if num not in numbers:  # if number not already in list of numbers
+    numbers.append(num)  # add it to list
+numbers.sort()  # sort numbers
+
+bingoCard = [
+  [numbers[0], " | ", numbers[1], " | ", numbers[2]],  # row one
+  ["----------------"],  # separator
+  [numbers[3], " | ", "BINGO", " | ", numbers[4]],  # row two
+  ["----------------"],  # separator
+  [numbers[5], " | ", numbers[6], " | ", numbers[7]],  # row three
+]
+
+prettyPrint()
