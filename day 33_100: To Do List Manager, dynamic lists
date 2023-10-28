@@ -1,0 +1,31 @@
+import time as t
+import os
+
+toDo = []
+
+def printList():
+  print() 
+  for item in toDo:
+    print(item)
+  print() 
+
+title = "To Do List Manager"
+print(f"{title:^50}")
+
+while True:
+  menu = input("\nDo you want to view, add to, or exit your to do list?: ")
+  if menu.lower() == "add":
+    item = input("\nWhat should I add to the to do list?: ")
+    toDo.append(item)
+  elif menu.lower() == "remove":
+    item = input("\nWhich item have you completed?: ")
+    if item in toDo:
+      toDo.remove(item)
+    else:
+      print(f"\n{item} was not in the list")
+  elif menu.lower() == "view":
+    t.sleep(0.5)
+    os.system("clear")
+    printList()
+  elif menu.lower() == "exit":
+    break
