@@ -1,0 +1,21 @@
+username = "mermaidsRdope"
+password = "sebastian"
+
+
+def login():
+    while True:
+        user = input("Username: ")
+        pwd = input("Password: ")
+        if user == username and pwd == password:
+            print("\nYou have successfully logged in!")
+            break
+        else:
+            print(
+                "\nOopsy daisies, you entered an incorrect username and/or password! Try again\n"
+            )
+            continue
+
+
+print("Login System")
+print()
+login()
