@@ -1,0 +1,25 @@
+import os
+
+title = "🦋 Palidrome Checker 🦋"
+
+def palindrome(word):
+  backwards_word = word[::-1] # make word backwards
+  if backwards_word == word: # if the word backwards is the same as the word fowards, it's a palindrome
+    print(f"\nYour word {word} is a palindrome!")
+  else:
+    print(f"\nYour word {word} is not a palindrome!\nSee? It reads {backwards_word}.")
+
+def main():
+  another = "yes"
+  while another[0] == "y":
+    os.system("clear")
+    print(f"{title:^40}")
+    user_word = input("\nEnter a word: ").strip().lower()
+    palindrome(user_word)
+    
+    another = input("\nWould you like to check another word? ").strip().lower()
+    if another[0] == "n":
+      print("Goodbye!")
+      break
+
+main()
