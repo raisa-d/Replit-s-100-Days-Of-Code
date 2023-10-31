@@ -1,0 +1,33 @@
+# Day 60 Challenge: Events Countdown Timer
+
+import datetime
+
+# print title
+title = "🎊 Event Countdown!!! 🎊"
+print(f"{title:^50}")
+
+# get today's date
+today = datetime.date.today()
+print(f"Today is {today}")
+
+# get user input for event name and date
+name = input("\nName of Event: ")
+month = int(input("\nMonth: "))
+day = int(input("Day: "))
+year = int(input("Year: "))
+
+# create event date
+event = datetime.date(year, month, day)
+
+# output the number of days until the event
+difference = event - today
+difference = difference.days
+
+if difference > 0:
+  print(f"Looking forward to it!\n{difference} days to go")
+
+elif difference < 0:
+  print(f"Oh no I missed it by {difference} days 😭")
+
+else:
+  print(f"Ayyyeee {event.title()} is today!!! 🥂🍾🍾🍾🥂")
