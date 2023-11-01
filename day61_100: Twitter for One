@@ -1,0 +1,109 @@
+from replit import db
+import os, datetime
+
+# colors
+cyan = "\033[36m"
+end = "\033[0m"
+bold = "\033[1m"
+
+
+# function for the enter button
+def enter():
+  input("\n[Enter] to continue\n")
+
+
+# function to print title
+def print_title():
+  os.system('cls' if os.name == 'nt' else 'clear')
+  title = f"{cyan}{bold}Twitter...kinda{end}"
+  print(f"{title:^80}\n")
+
+
+# display a menu with option to add or view tweets
+def menu():
+  menu = ""  # set menu to empty string
+  while True:
+    print_title()
+
+    # ask for user input (add/view/exit)
+    menu = input(
+      "1. Add a tweet\n2. View tweet history\n3. Exit\n> ").strip().lower()
+    if menu != "":
+      if menu[0] in ["1", "a"]:  # add
+        add()
+      elif menu[0] in ["2", "v"]:  # view
+        view()
+      elif menu[0] in ["3", "e", "x"]:  # exit
+        print("Goodbye!")
+        quit()
+      else:  # invalid response
+        print(
+          "Invalid response. Please choose 1, 2, or 3 or enter the name of the option you want to choose"
+        )
+        enter()
+        continue
+    else:  # missing response
+      print(
+        "You did not make a choice. 1, 2, or 3 or enter the name of the option you want to choose"
+      )
+      enter()
+      continue
+
+
+# add a tweet
+def add():
+  tweet = ""
+  while True:
+    print_title()
+    tweet = input("What do you want to tell the world?\n\n> ")
+    if tweet != "":  # if tweet is not empty string, store the tweet
+      store(tweet)
+      break
+    else:  # if they didn't type anything, prompt input again
+      print("You didn't say anything...")
+      enter()
+
+
+# view tweets. show most recent first,
+# show 10 tweets at a time, ask user if they want to see next 10 (yes or no) --> no goes back to main menu
+def view():
+  print_title()
+  print(f"{bold}Tweet History{end}")
+  # finding matches with same prefix (all of the timestamps/keys have "mes" as their prefix)
+  matches = db.prefix("mes")
+
+  # putting matches in reverse order
+  matches = matches[::-1]
+  counter = 0
+  print()
+  for i in matches:
+    print(f"{db[i]}\n")
+    counter += 1
+
+    if counter == 10:
+      next_page = input("View next 10 tweets (y/n)?\n> ").strip().lower()
+
+      if next_page[0] == "n":
+        break
+      else:
+        print_title()
+        print(f"{bold}Tweet History{end}\n")
+  enter()
+
+
+# store tweet in database
+def store(users_tweet):
+  # create timestamp and store key
+  timestamp = datetime.datetime.now()
+  key = f"mes{timestamp}"
+  # timestamp as the key and the tweet as the value
+  db[key] = users_tweet
+
+
+# main function to run code
+def main():
+  menu()
+
+
+# calling program
+main()
