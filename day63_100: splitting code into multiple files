@@ -1,0 +1,23 @@
+### util.py
+import os
+
+
+# clear screen
+def clear():
+  os.system('cls' if os.name == 'nt' else 'clear')
+
+
+# enter to continue button
+def enter():
+  input("\n[Enter] to continue\n> ")
+
+
+### main.py
+from util import enter, clear
+
+print(
+  "I usually use a function I created called enter() to tell the user to hit enter to continue.\nThen, I use my second function called clear() to clear the screen before I print something new."
+)
+enter()
+clear()
+print("See? You clicked enter and now you're on a new page!")
