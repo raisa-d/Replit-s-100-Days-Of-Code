@@ -1,1 +1,119 @@
+# Private Diary Program
+import os, datetime
+from replit import db
+
+# colors
+end = "\033[0m"
+bold = "\033[1m"
+
+# access password
+correct_password = "0000"
+
+
+# clear screen
+def clear():
+  os.system('cls' if os.name == 'nt' else 'clear')
+
+
+# enter to continue button
+def enter():
+  input("\n[Enter] to continue\n> ")
+
+
+# login page
+def login():
+  password_entered = ""
+  while True:
+    clear()
+    print("Top Secret Journal Login\n")
+    password_entered = input("Enter Password\n> ").strip()
+
+    if password_entered != "":
+      # if user enters the correct password
+      if password_entered == correct_password:
+        main_menu()
+
+      # exit program if they enter wrong password
+      else:
+        print("\nIncorrect Password.\nYou're not getting in.")
+        quit()
+
+    # if user doesn't input anything
+    else:
+      print("Please enter the password.")
+      enter()
+      continue
+
+
+# main menu
+def main_menu():
+  option = ""
+  while True:
+    clear()
+    print("Main Menu\n")
+    option = input(
+      "1. Add Journal Entry\n2. View Entries\n3. Exit\n> ").strip().lower()
+
+    if option != "":
+      if option[0] in ["1", "a"]:  # add
+        add_entry()
+      elif option[0] in ["2", "v"]:  # view
+        view_entries()
+      elif option[0] in ["3", "e", "x"]:  # exit
+        print("Goodbye!")
+        quit()
+
+    # if user inputs an empty string
+    else:
+      print(
+        "Please enter the number corresponding with the menu item you want to select."
+      )
+      enter()
+      continue
+
+
+# add entry to diary
+def add_entry():
+  clear()
+  entry = input("Please write your journal entry below\n> ")
+
+  # store entry in database with timestamp as key
+  timestamp = datetime.datetime.now()
+
+  # store key as timestamp with prefix "x"
+  key = f"x{timestamp}"
+
+  # assign the entry as the value
+  db[key] = entry
+
+
+def view_entries():
+  matches = db.prefix("x")  # finding all with prefix "x" (all timestamps)
+  matches = matches[::-1]  # putting list in reverse order (most recent first)
+  counter = 0
+  print()
+  next_page = ""
+  while True:
+    clear()
+    print("Previous Journal Entries\n")
+    for i in matches:
+      print(f"{bold}{i[1:11]}{end}\n{db[i]}\n\n")
+      counter += 1
+  
+      if counter >= 1:
+        next_page = input("View next journal entry (y/n)?\n> ").strip().lower()
+  
+        if next_page != "":
+          if next_page[0] == "n":
+            main_menu()
+          else:
+            clear()
+            print("Previous Journal Entries\n")
+        else:
+          print("Missing input.")
+          break
+    enter()
+
+
+login()
 
