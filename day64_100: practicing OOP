@@ -1,0 +1,63 @@
+# Job class
+class Job():
+  # store details for name, salary, hours worked
+  def __init__(self, name, salary, hours):
+    self.name = name
+    self.salary = salary
+    self.hours = hours
+
+  # method to print out job details nicely
+  def print_job(self):
+
+    print(
+      f"Job type: {self.name}\nSalary: ${self.salary}\nHours worked: {self.hours}\n"
+    )
+
+
+# doctor subclass
+class Doctor(Job):
+
+  def __init__(self, speciality, years):
+    self.name = "Doctor"
+    self.salary = 100000
+    self.hours = 60
+    self.speciality = speciality
+    self.years = years
+
+  def print_doctor(self):
+
+    print(
+      f"Job type: {self.name}\nSalary: ${self.salary}\nHours worked: {self.hours}\nSpeciality: {self.speciality}\nYears Experience: {self.years}\n"
+    )
+
+
+# teacher subclass (subject, position)
+class Teacher(Job):
+
+  def __init__(self, subject, position):
+    self.name = "Teacher"
+    self.salary = 40000
+    self.hours = 53
+    self.subject = subject
+    self.position = position
+
+  def print_teacher(self):
+
+    print(
+      f"Job type: {self.name}\nSalary: ${self.salary}\nHours worked: {self.hours}\nSubject: {self.subject}\nPosition: {self.position}\n"
+    )
+
+
+# lawyer instance
+lawyer = Job("Lawyer", 85000, 66)
+
+# computer science teacher instance
+teacher = Teacher("Computer Science", "Classroom Teacher")
+
+# pediatric doctor instance
+doctor = Doctor("Pediatrician", 9)
+
+print("Job List!\n")
+lawyer.print_job()
+teacher.print_teacher()
+doctor.print_doctor()
