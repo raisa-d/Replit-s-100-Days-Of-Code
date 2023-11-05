@@ -1,0 +1,87 @@
+# Character class
+class Character():
+
+  def __init__(self, name, HP, MP):
+    self.name = name
+    self.HP = HP
+    self.MP = MP
+
+
+# Player class inherits from Character class
+class Player(Character):
+
+  def __init__(self, lives):
+    self.name = "Phoebe"
+    self.HP = 40
+    self.MP = 20
+    self.lives = lives
+
+  def alive(self):
+    if self.HP <= 0:
+      print("Alive? No")
+    else:
+      print("Alive? Yes")
+
+  def print(self):
+    print(
+      f"{self.name.title()}\nHealth Points: {self.HP}\nMagic Points: {self.MP}\nLives: {self.lives}"
+    )
+    self.alive()
+
+
+# Enemy class inherits from Character class
+class Enemy(Character):
+
+  def __init__(self, type, strength):
+    self.type = type
+    self.strength = strength
+
+
+# Orc class inherits from Enemy class
+class Orc(Enemy):
+
+  def __init__(self, speed):
+    self.name = "Gia"
+    self.HP = 50
+    self.MP = 30
+    self.type = "Orc"
+    self.strength = 3
+    self.speed = speed
+
+  def print(self):
+    print(
+      f"\n{self.name.title()}\nHealth Points: {self.HP}\nMagic Points: {self.MP}\nType: {self.type}\nStrength: {self.strength}\nSpeed: {self.speed}"
+    )
+
+
+# Vampire class inherits from Enemy class
+class Vampire(Enemy):
+
+  def __init__(self, is_day):
+    self.name = "Rebekah"
+    self.HP = 60
+    self.MP = 40
+    self.type = "Vampire"
+    self.strength = 3
+    self.is_night = None
+
+  def day_or_night(self):
+    if self.is_night == True:
+      print("Time of Day: Nighttime")
+    else:
+      print("Time of Day: Daytime")
+
+  def print(self):
+    print(
+      f"\n{self.name.title()}\nHealth Points: {self.HP}\nMagic Points: {self.MP}\nType: {self.type}\nStrength: {self.strength}"
+    )
+    self.day_or_night()
+
+
+player = Player(3)
+orc = Orc(2)
+vampire = Vampire(True)
+
+player.print()
+orc.print()
+vampire.print()
