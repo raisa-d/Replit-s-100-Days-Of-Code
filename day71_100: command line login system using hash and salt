@@ -1,0 +1,120 @@
+import os, random as r
+from replit import db
+
+# enter to continue button
+def enter():
+  input("\n[Enter] to continue\n")
+
+# generate 5 random digits for salt
+def generate_salt():
+  salt_list = []
+  for i in range(5):
+    num = r.randint(0, 10)
+    salt_list.append(num)
+  salt = str(salt_list[0]) + str(salt_list[1]) + str(salt_list[2]) + str(salt_list[3]) + str(salt_list[4])
+  return salt
+
+# function to clear screen and print title
+def title():
+  os.system('cls' if os.name == 'nt' else 'clear')
+  print("🗝  Login 🗝\n")
+  
+# display a menu with ability add a user or login
+def menu():
+  menu = ""
+  while True:
+    title()
+    menu = input("1. Add User\n2. Login\n3. Exit\n> ").strip().lower()
+
+    # if is not an empty string
+    if menu != "":
+      # if user chooses add, call add function
+      if menu[0] in ["1", "a"]:
+        add()
+  
+      # if user chooses login, call login function
+      elif menu[0] in ["2", "l"]:
+        login()
+
+      elif menu[0] in ["3", "x", "e"]:
+        print("Goodbye!")
+        quit()
+  
+      else:
+        input("Invalid input.\nPlease type in the number that corresponds with the option you'd like to choose or type the first letter 'a', 'l', or 'e'")
+        enter()
+        continue
+    
+    # if user typed nothing
+    else: 
+      input("Invalid input.\nPlease type in the number that corresponds with the option you'd like to choose or type the first letter 'a' or 'l'")
+      enter()
+      continue
+
+
+def add():
+  while True:
+    title()
+    # ask for new user password that user is adding
+    print("Add an Account\n")
+    user = input("Username: ")
+    pwd = input("Password: ")
+  
+    # check if username already exists
+    keys = db.keys()
+    if user in keys:
+      print("Error: Username already exists.")
+      enter()
+      continue
+  
+  # generate salt
+  salt = generate_salt()
+  
+  # concatenate salt to password user entered
+  new_pwd = f"{pwd}{salt}"
+  
+  # hash new password
+  new_pwd = hash(new_pwd)
+
+
+  # store hash and salt in a repl db with username as key
+  db[user] = {"password": new_pwd, "salt": salt}
+  print("User added!")
+  enter()
+
+
+# login
+def login():
+  title()
+  
+  # get username and password
+  user = input("Username: ")
+  pwd = input("Password: ")
+
+  # check if username exists
+  keys = db.keys()
+  if user not in keys:
+    print("\nError: Username does not exist.\nSelect 1 on Main Menu to Create New Account.")
+    input("\n[Enter] to go back to menu\n")
+    menu()
+
+  # if username is in database
+  else:
+    # get salt for this password from database
+    salt = db[user]["salt"]
+  
+    # add salt to input password
+    new_password = f"{pwd}{salt}"
+  
+    # convert input to hash with salt 
+    new_password = hash(new_password)
+  
+    # compare hashed password to passwords in database
+    if new_password == db[user]["password"]:
+      print("\nLogged in!")
+      enter()
+    else:
+      print("Invalid password.")
+      enter()
+
+menu()
