@@ -1,0 +1,160 @@
+# Private Diary Program
+import os, datetime, random as r
+from replit import db
+
+# colors
+end = "\033[0m"
+bold = "\033[1m"
+
+# access password
+correct_password = "0000"
+
+
+# clear screen
+def clear():
+  os.system('cls' if os.name == 'nt' else 'clear')
+
+
+# enter to continue button
+def enter():
+  input("\n[Enter] to continue\n> ")
+
+
+# login page
+def login():
+  while True:
+    clear()
+    print("Top Secret Journal Login\n")
+
+    # if there are no keys, the username and pass have yet to be created and we will prompt user to create them
+    keys = db.keys()
+    if len(keys) < 1:
+      print("Create an account\n")
+
+      username = input("Username\n> ")
+      password = input("Password\n> ")
+
+      # create salt
+      salt = r.randint(10000, 99999)
+
+      # combine password with salt and hash it
+      new_pwd = hash(f"{password}{salt}")
+
+      # store hashed and salted password in repl db using the username as the key
+      db[username] = {"password": new_pwd, "salt": salt}
+      print("Username and Password Created!")
+      enter()
+      main_menu()
+
+    # if they already created a username/pass, login
+    else:
+      password_entered = ""
+      while True:
+        clear()
+        print("Top Secret Journal Login\n")
+        username = input("Enter Username\n> ")
+        password_entered = input("Enter Password\n> ").strip()
+
+        # if they typed something in
+        if password_entered != "":
+
+          # check username is in keys
+          keys = db.keys()
+          if username in keys:
+            # get salt for this password from database
+            salt = db[username]["salt"]
+
+          # if wrong username, print error message and make them start over
+          else:
+            print("Avast there villain!\nIncorrect login information.")
+            enter()
+            continue
+
+          # salt and hash password entered
+          new_pass = f"{hash(password_entered)}{salt}"
+
+          # if user enters the correct password
+          if new_pass == db[username]["password"]:
+            main_menu()
+
+          # exit program if they enter wrong password
+          else:
+            print("\nIncorrect Password.\nYou're not getting in.")
+            quit()
+
+        # if user doesn't input anything
+        else:
+          print("Please enter the password.")
+          enter()
+          continue
+
+
+# main menu
+def main_menu():
+  option = ""
+  while True:
+    clear()
+    print("Main Menu\n")
+    option = input(
+      "1. Add Journal Entry\n2. View Entries\n3. Exit\n> ").strip().lower()
+
+    if option != "":
+      if option[0] in ["1", "a"]:  # add
+        add_entry()
+      elif option[0] in ["2", "v"]:  # view
+        view_entries()
+      elif option[0] in ["3", "e", "x"]:  # exit
+        print("Goodbye!")
+        quit()
+
+    # if user inputs an empty string
+    else:
+      print(
+        "Please enter the number corresponding with the menu item you want to select."
+      )
+      enter()
+      continue
+
+
+# add entry to diary
+def add_entry():
+  clear()
+  # store entry in database with timestamp as key
+  timestamp = datetime.datetime.now()
+  print(f"Diary Entry | {timestamp}")
+  entry = input("> ")
+
+  # assign the entry as the value
+  db[timestamp] = entry
+
+
+def view_entries():
+  matches = db.prefix("2")  # finding all with prefix "x" (all timestamps)
+  matches = matches[::-1]  # putting list in reverse order (most recent first)
+  counter = 0
+  print()
+  next_page = ""
+  while True:
+    clear()
+    print("Previous Journal Entries\n")
+    for i in matches:
+      print(f"{bold}{i[1:11]}{end}\n{db[i]}\n\n")
+      counter += 1
+
+      if counter >= 1:
+        next_page = input("View next journal entry (y/n)?\n> ").strip().lower()
+
+        if next_page != "":
+          if next_page[0] == "n":
+            main_menu()
+          else:
+            clear()
+            print("Previous Journal Entries\n")
+        else:
+          print("Missing input.")
+          break
+    enter()
+
+
+keys = db.keys()
+login()
