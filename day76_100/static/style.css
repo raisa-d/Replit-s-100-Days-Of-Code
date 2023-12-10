@@ -1,0 +1,62 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background:black;
+  color:#fff;
+}
+
+html {
+  font-size:62.5%;
+}
+
+img {
+  width:50vw;
+  border-radius:100%;
+}
+
+div {
+  justify-content: center;
+}
+
+h1 {
+  font-size:3rem;
+  margin:2% 0;
+  padding:0;
+}
+
+section {
+  text-align:center;
+}
+
+span {
+  font-size:1.6rem;
+}
+
+ul, div {
+  display:flex;
+}
+
+ul {
+  flex-flow: column;
+  align-items:center;
+  list-style:none;
+  font-size:2rem;
+}
+
+a {
+  text-decoration:none;
+  color:#e656e6;
+}
+
+a:hover {
+  font-weight:bold;
+}
+
+@media all and (min-width:480px) {
+  img {
+    width: 20vw;
+  }
+}
